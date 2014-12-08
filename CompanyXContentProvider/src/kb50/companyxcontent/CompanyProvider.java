@@ -16,7 +16,7 @@ import android.util.Log;
 
 public class CompanyProvider extends ContentProvider {
 	static final String PROVIDER_NAME = "net.learn2develop.provider.Books";
-	static final Uri CONTENT_URI = Uri.parse("content://”+ PROVIDER_NAME + “/books");
+	static final Uri CONTENT_URI = Uri.parse("content://"+ PROVIDER_NAME + "/books");
 	
 	static final String _ID = "_id";
 	static final String TITLE = "title";
