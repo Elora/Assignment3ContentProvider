@@ -8,11 +8,12 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="21" />
 
-      <permission
-        android:name="string"
-        android:label="string resource"
-        android:permissionGroup="string"
-        android:protectionLevel="normal" />
+       <permission android:description="@string/permission_description"
+            android:icon="@drawable/ic_launcher"
+            android:label="Read company details"
+            android:name="kb50.companyx.GRANT_PRSN"
+            
+            android:protectionLevel="normal"/>
       
     <application
         android:allowBackup="true"

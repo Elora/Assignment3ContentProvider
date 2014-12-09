@@ -3,7 +3,7 @@
 
     <string name="app_name">CompanyXContentProvider</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="permission_description">Grant read permission to Company</string>
     <string name="title_activity_company_provider">CompanyProviderActivity</string>
 
 </resources>
