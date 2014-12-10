@@ -9,6 +9,7 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.text.TextUtils;
 
 public class CompanyProvider extends ContentProvider {
 
@@ -218,17 +219,128 @@ public class CompanyProvider extends ContentProvider {
 
 	}
 
-	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = 0;
+		String id = uri.getPathSegments().get(1);
+		switch (uriMatcher.match(uri)) {
+		case COMPANY:
+			count = companyDB.delete("company", selection, selectionArgs);
+			break;
+		case COMPANY_ID:
+
+			count = companyDB.delete("company",
+					"id = "
+							+ id
+							+ (!TextUtils.isEmpty(selection) ? " AND ("
+									+ selectionArgs + ')' : ""), selectionArgs);
+			break;
+
+		case OFFICE:
+			count = companyDB.delete("office", selection, selectionArgs);
+			break;
+		case OFFICE_ID:
+			count = companyDB.delete("office",
+					"id = "
+							+ id
+							+ (!TextUtils.isEmpty(selection) ? " AND ("
+									+ selectionArgs + ')' : ""), selectionArgs);
+			break;
+
+		case LOCATION:
+			count = companyDB.delete("location", selection, selectionArgs);
+			break;
+		case LOCATION_ID:
+			count = companyDB.delete("location",
+					"id = "
+							+ id
+							+ (!TextUtils.isEmpty(selection) ? " AND ("
+									+ selectionArgs + ')' : ""), selectionArgs);
+			break;
+
+		case IMAGE:
+			count = companyDB.delete("product_image", selection, selectionArgs);
+			break;
+		case IMAGE_ID:
+
+			count = companyDB.delete("product_image", "id = "
+					+ id
+					+ (!TextUtils.isEmpty(selection) ? " AND (" + selectionArgs
+							+ ')' : ""), selectionArgs);
+			break;
+		default:
+			throw new IllegalArgumentException("Unknown URI " + uri);
+		}
+		getContext().getContentResolver().notifyChange(uri, null);
+		return count;
 	}
 
 	@Override
 	public int update(Uri uri, ContentValues values, String selection,
 			String[] selectionArgs) {
-		// TODO Auto-generated method stub
-		return 0;
+		int count = 0;
+		switch (uriMatcher.match(uri)) {
+		case COMPANY:
+			count = companyDB.update("company", values, selection,
+					selectionArgs);
+			break;
+		case COMPANY_ID:
+			count = companyDB.update(
+					"company",
+					values,
+					"id="
+							+ uri.getPathSegments().get(1)
+							+ (!TextUtils.isEmpty(selection) ? " AND ("
+									+ selection + ')' : ""), selectionArgs);
+			break;
+
+		case LOCATION:
+			count = companyDB.update("location", values, selection,
+					selectionArgs);
+			break;
+		case LOCATION_ID:
+			count = companyDB.update(
+					"location",
+					values,
+					"id="
+							+ uri.getPathSegments().get(1)
+							+ (!TextUtils.isEmpty(selection) ? " AND ("
+									+ selection + ')' : ""), selectionArgs);
+			break;
+
+		case OFFICE:
+			count = companyDB
+					.update("office", values, selection, selectionArgs);
+			break;
+		case OFFICE_ID:
+			count = companyDB.update(
+					"office",
+					values,
+					"id="
+							+ uri.getPathSegments().get(1)
+							+ (!TextUtils.isEmpty(selection) ? " AND ("
+									+ selection + ')' : ""), selectionArgs);
+			break;
+
+		case IMAGE:
+			count = companyDB.update("product_image", values, selection,
+					selectionArgs);
+			break;
+		case IMAGE_ID:
+			count = companyDB.update(
+					"product_image",
+					values,
+					"id="
+							+ uri.getPathSegments().get(1)
+							+ (!TextUtils.isEmpty(selection) ? " AND ("
+									+ selection + ')' : ""), selectionArgs);
+			break;
+
+		default:
+			throw new IllegalArgumentException("Unknown Uri" + uri);
+		}
+		getContext().getContentResolver().notifyChange(uri, null);
+		return count;
+
 	}
 
 }

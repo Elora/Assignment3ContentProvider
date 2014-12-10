@@ -4,16 +4,19 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    
+       <permission android:description="@string/permission_description"
+            android:icon="@drawable/ic_launcher"
+            android:label="Read company details"
+            android:name="kb50.companyxcontentprovider.GET"
+            
+            android:protectionLevel="dangerous"/>
+    
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="21" />
 
-       <permission android:description="@string/permission_description"
-            android:icon="@drawable/ic_launcher"
-            android:label="Read company details"
-            android:name="kb50.companyx.GRANT_PRSN"
-            
-            android:protectionLevel="normal"/>
+    
       
     <application
         android:allowBackup="true"
@@ -21,6 +24,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <provider
+             android:exported="true" 
             android:name=".CompanyProvider"
             android:authorities="com.example.appcontentprovider.CompanyProvider" >
         </provider>
