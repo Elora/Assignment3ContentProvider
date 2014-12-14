@@ -22,7 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 			db.execSQL("CREATE TABLE company (id INTEGER PRIMARY KEY,name TEXT,info TEXT,website TEXT)");
 			db.execSQL("CREATE TABLE location (id INTEGER PRIMARY KEY,country TEXT,city TEXT,address TEXT)");
 			db.execSQL("CREATE TABLE product_image (id INTEGER PRIMARY KEY,path TEXT,company_id INTEGER,FOREIGN KEY(company_id) REFERENCES company (id))");
-			db.execSQL("CREATE TABLE office (id INTEGER PRIMARY KEY,tel_number INTEGER,location_id INTEGER,FOREIGN KEY(location_id) REFERENCES location (id),company_id INTEGER, FOREIGN KEY(company_id) REFERENCES company(id))");
+			db.execSQL("CREATE TABLE office (id INTEGER PRIMARY KEY,tel_number INTEGER,location_id INTEGER,company_id INTEGER, FOREIGN KEY(company_id) REFERENCES company(id),FOREIGN KEY(location_id) REFERENCES location (id))");
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -32,7 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		db.execSQL("DROP TABLE IF EXISTS");
+		db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
 		onCreate(db);
 
 	}

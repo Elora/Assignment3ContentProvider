@@ -13,7 +13,7 @@ import android.text.TextUtils;
 
 public class CompanyProvider extends ContentProvider {
 
-	static final String PROVIDER_NAME = "com.example.appcontentprovider.CompanyProvider";
+	static final String PROVIDER_NAME = "kb50.companyxcontent.companyxcontentprovider";
 
 	public static final Uri CONTENT_COMPANIES = Uri.parse("content://"
 			+ PROVIDER_NAME + "/company");
@@ -63,7 +63,9 @@ public class CompanyProvider extends ContentProvider {
 	public boolean onCreate() {
 
 		DBHelper = new DatabaseHelper(getContext());
+		
 		companyDB = DBHelper.getWritableDatabase();
+		
 		return (companyDB == null) ? false : true;
 	}
 
@@ -135,23 +137,23 @@ public class CompanyProvider extends ContentProvider {
 		case COMPANY:
 			return "vnd.android.cursor.dir/vnd.appcontentprovider.CompanyProvider ";
 
-		case 3:
-			return "vnd.android.cursor.item/vnd.appcontentprovider.OfficeProvider ";
-
-		case 4:
+		case OFFICE:
 			return "vnd.android.cursor.dir/vnd.appcontentprovider.OfficeProvider ";
 
-		case 5:
-			return "vnd.android.cursor.item/vnd.appcontentprovider.LocationProvider ";
+		case OFFICE_ID:
+			return "vnd.android.cursor.item/vnd.appcontentprovider.OfficeProvider ";
 
-		case 6:
+		case LOCATION:
 			return "vnd.android.cursor.dir/vnd.appcontentprovider.LocationProvider ";
 
-		case 7:
-			return "vnd.android.cursor.item/vnd.appcontentprovider.ImageProvider ";
+		case LOCATION_ID:
+			return "vnd.android.cursor.item/vnd.appcontentprovider.LocationProvider ";
 
-		case 8:
+		case IMAGE:
 			return "vnd.android.cursor.dir/vnd.appcontentprovider.ImageProvider ";
+
+		case IMAGE_ID:
+			return "vnd.android.cursor.item/vnd.appcontentprovider.ImageProvider ";
 
 		default:
 			throw new IllegalArgumentException("Unsupported URI: " + uri);
